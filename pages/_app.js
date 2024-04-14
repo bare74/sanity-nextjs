@@ -1,5 +1,6 @@
 // https://nextjs.org/docs/basic-features/built-in-css-support#adding-a-global-stylesheet
 import "../styles.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 
 // This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }) {
