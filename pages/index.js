@@ -1,6 +1,15 @@
 import { createClient } from "next-sanity";
 import imageUrlBuilder from "@sanity/image-url";
 
+const formatDate = (dateString) => {
+  const options = { month: "short", year: "numeric" };
+  const formattedDate = new Date(dateString).toLocaleDateString(
+    "no-NO",
+    options
+  );
+  return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
+};
+
 export default function IndexPage({
   works,
   educations,
@@ -11,6 +20,12 @@ export default function IndexPage({
   return (
     <>
       <main>
+        {!works.length > 0 && <p>No pets to show</p>}
+        {works.length > 0 && (
+          <div>
+            <pre>{JSON.stringify(works, null, 2)}</pre>
+          </div>
+        )}
         {/* <div className="toggle-switch">
           <label className="switch">
             <input type="checkbox" onclick="myFunction()" />
@@ -95,11 +110,15 @@ export default function IndexPage({
           {/* <!-- Om meg--> */}
           <section className="resume-section" id="about">
             <div className="resume-section-content">
-              <h1 className="mb-0">
-                Bjørn Are
-                <span className="text-primary">Nielsen</span>
-              </h1>
-
+              {contacts?.length > 0 &&
+                contacts.map((contact) => (
+                  <div key={contact._id}>
+                    <h1 className="mb-0">
+                      {contact?.firstname}{" "}
+                      <span className="text-primary">{contact?.lastname}</span>
+                    </h1>
+                  </div>
+                ))}
               <div className="subheading mb-5">
                 {contacts?.length > 0 &&
                   contacts.map((contact) => (
@@ -155,148 +174,19 @@ export default function IndexPage({
                           <p>{work?.text}</p>
                         </div>
                         <div className="flex-shrink-0">
-                          <span className="text-primary">{work?.fromdate}</span>
-                          <span className="text-primary">{work?.todate}</span>
+                          <span className="text-primary">
+                            {formatDate(work?.fromdate)}
+                          </span>{" "}
+                          -{" "}
+                          <span className="text-primary">
+                            {work?.todate ? formatDate(work.todate) : "DD"}
+                          </span>
                         </div>
                       </div>
                     </li>
                   ))}
                 </ul>
               )}
-              <div className="flex-shrink-0">
-                <span className="text-primary" id="Year-From-14"></span>
-              </div>
-
-              <div className="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div className="flex-grow-1">
-                  <h3 className="mb-0" id="Work-title"></h3>
-                  <div className="subheading mb-3" id="Work-Place"></div>
-                  <p id="Work-experience"></p>
-                </div>
-                <div className="flex-shrink-0">
-                  <span id="Year-From" className="text-primary"></span>
-                </div>
-              </div>
-              <div className="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div className="flex-grow-1">
-                  <h3 className="mb-0" id="Work-title-2"></h3>
-                  <div className="subheading mb-3" id="Work-Place-2"></div>
-                  <p id="Work-experience-2"></p>
-                </div>
-                <div className="flex-shrink-0">
-                  <span className="text-primary" id="Year-From-2"></span>
-                </div>
-              </div>
-              <div className="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div className="flex-grow-1">
-                  <h3 className="mb-0" id="Work-title-3"></h3>
-                  <div className="subheading mb-3" id="Work-Place-3"></div>
-                  <p id="Work-experience-3"></p>
-                </div>
-                <div className="flex-shrink-0">
-                  <span className="text-primary" id="Year-From-3"></span>
-                </div>
-              </div>
-              <div className="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div className="flex-grow-1">
-                  <h3 className="mb-0" id="Work-title-4"></h3>
-                  <div className="subheading mb-3" id="Work-Place-4"></div>
-                  <p id="Work-experience-4"></p>
-                </div>
-                <div className="flex-shrink-0">
-                  <span className="text-primary" id="Year-From-4"></span>
-                </div>
-              </div>
-              <div className="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div className="flex-grow-1">
-                  <h3 className="mb-0" id="Work-title-5"></h3>
-                  <div className="subheading mb-3" id="Work-Place-5"></div>
-                  <p id="Work-experience-5"></p>
-                </div>
-                <div className="flex-shrink-0">
-                  <span className="text-primary" id="Year-From-5"></span>
-                </div>
-              </div>
-              <div className="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div className="flex-grow-1">
-                  <h3 className="mb-0" id="Work-title-6"></h3>
-                  <div className="subheading mb-3" id="Work-Place-6"></div>
-                  <p id="Work-experience-6"></p>
-                </div>
-                <div className="flex-shrink-0">
-                  <span className="text-primary" id="Year-From-6"></span>
-                </div>
-              </div>
-              <div className="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div className="flex-grow-1">
-                  <h3 className="mb-0" id="Work-title-7"></h3>
-                  <div className="subheading mb-3" id="Work-Place-7"></div>
-                  <p id="Work-experience-7"></p>
-                </div>
-                <div className="flex-shrink-0">
-                  <span className="text-primary" id="Year-From-7"></span>
-                </div>
-              </div>
-              <div className="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div className="flex-grow-1">
-                  <h3 className="mb-0" id="Work-title-8"></h3>
-                  <div className="subheading mb-3" id="Work-Place-8"></div>
-                  <p id="Work-experience-8"></p>
-                </div>
-                <div className="flex-shrink-0">
-                  <span className="text-primary" id="Year-From-8"></span>
-                </div>
-              </div>
-              <div className="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div className="flex-grow-1">
-                  <h3 className="mb-0" id="Work-title-9"></h3>
-                  <div className="subheading mb-3" id="Work-Place-9"></div>
-                  <p id="Work-experience-9"></p>
-                </div>
-                <div className="flex-shrink-0">
-                  <span className="text-primary" id="Year-From-9"></span>
-                </div>
-              </div>
-              <div className="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div className="flex-grow-1">
-                  <h3 className="mb-0" id="Work-title-10"></h3>
-                  <div className="subheading mb-3" id="Work-Place-10"></div>
-                  <p id="Work-experience-10"></p>
-                </div>
-                <div className="flex-shrink-0">
-                  <span className="text-primary" id="Year-From-10"></span>
-                </div>
-              </div>
-              <div className="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div className="flex-grow-1">
-                  <h3 className="mb-0" id="Work-title-11"></h3>
-                  <div className="subheading mb-3" id="Work-Place-11"></div>
-                  <p id="Work-experience-11"></p>
-                </div>
-                <div className="flex-shrink-0">
-                  <span className="text-primary" id="Year-From-11"></span>
-                </div>
-              </div>
-              <div className="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div className="flex-grow-1">
-                  <h3 className="mb-0" id="Work-title-12"></h3>
-                  <div className="subheading mb-3" id="Work-Place-12"></div>
-                  <p id="Work-experience-12"></p>
-                </div>
-                <div className="flex-shrink-0">
-                  <span className="text-primary" id="Year-From-12"></span>
-                </div>
-              </div>
-              <div className="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div className="flex-grow-1">
-                  <h3 className="mb-0" id="Work-title-13"></h3>
-                  <div className="subheading mb-3" id="Work-Place-13"></div>
-                  <p id="Work-experience-13"></p>
-                </div>
-                <div className="flex-shrink-0">
-                  <span className="text-primary" id="Year-From-13"></span>
-                </div>
-              </div>
             </div>
           </section>
           <hr className="m-0" />
@@ -304,47 +194,38 @@ export default function IndexPage({
           <section className="resume-section" id="education">
             <div className="resume-section-content">
               <h2 className="mb-5">Utdanning</h2>
-              <div className="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div className="flex-grow-1">
-                  <h3 className="mb-0" id="school-place"></h3>
-                  <div className="subheading mb-3" id="education-Title"></div>
-                </div>
-                <div className="flex-shrink-0">
-                  <span className="text-primary" id="Year-From-To"></span>
-                </div>
-              </div>
-              <div className="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div className="flex-grow-1">
-                  <h3 className="mb-0" id="school-place-2"></h3>
-                  <div className="subheading mb-3" id="education-Title-2"></div>
-                </div>
-                <div className="flex-shrink-0">
-                  <span className="text-primary" id="Year-From-To-2"></span>
-                </div>
-              </div>
-              <div className="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div className="flex-grow-1">
-                  <h3 className="mb-0" id="school-place-3"></h3>
-                  <div className="subheading mb-3" id="education-Title-3"></div>
-                </div>
-                <div className="flex-shrink-0">
-                  <span className="text-primary" id="Year-From-To-3"></span>
-                </div>
-              </div>
-              <div className="d-flex flex-column flex-md-row justify-content-between mb-5">
-                <div className="flex-grow-1">
-                  <h3 className="mb-0" id="school-place-4"></h3>
-                  <div className="subheading mb-3" id="education-Title-4"></div>
-                </div>
-                <div className="flex-shrink-0">
-                  <span className="text-primary" id="Year-From-To-4"></span>
-                </div>
-              </div>
+              {educations.length > 0 && (
+                <ul className="container">
+                  {educations.map((education) => (
+                    <li key={education._id}>
+                      <div className="d-flex flex-column flex-md-row justify-content-between mb-5">
+                        <div className="flex-grow-1">
+                          <h3 className="mb-0">{education?.school}</h3>
+                          <div className="subheading mb-3">
+                            {education?.line}
+                          </div>
+                        </div>
+                        <div className="flex-shrink-0">
+                          <span className="text-primary">
+                            {formatDate(education?.fromdate)}
+                          </span>{" "}
+                          -{" "}
+                          <span className="text-primary">
+                            {education?.todate
+                              ? formatDate(education.todate)
+                              : "DD"}
+                          </span>
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           </section>
           <hr className="m-0" />
           {/* <!-- Datakunnskaper--> */}
-          <section className="resume-section" id="skills">
+          <section className="resume-section">
             <div className="resume-section-content">
               <h2 className="mb-5">Datakunnskaper</h2>
               <div className="subheading mb-3">Programmer språk og verktøy</div>
@@ -382,6 +263,21 @@ export default function IndexPage({
                 </li>
               </ul>
               <div className="subheading mb-3">Programmer</div>
+              {skill.length > 0 && (
+                <ul className="container">
+                  {skill.map((skills) => (
+                    <li key={skills._id}>
+                      <div className="d-flex flex-column flex-md-row justify-content-between mb-5">
+                        <div className="flex-grow-1">
+                          <div className="subheading mb-3">
+                            {skills?.program}
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
               <ul className="fa-ul mb-0">
                 <li>
                   <span className="fa-li">
