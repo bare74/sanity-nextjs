@@ -20,12 +20,12 @@ export default function IndexPage({
   return (
     <>
       <main>
-        {!works.length > 0 && <p>No pets to show</p>}
+        {/* {!works.length > 0 && <p>No pets to show</p>}
         {works.length > 0 && (
           <div>
             <pre>{JSON.stringify(works, null, 2)}</pre>
           </div>
-        )}
+        )} */}
         {/* <div className="toggle-switch">
           <label className="switch">
             <input type="checkbox" onclick="myFunction()" />
