@@ -12726,3 +12726,20 @@ input:checked+.slider:before {
     left: 85%;
   }
 }
+
+/* .container-test {
+  min-height: 100vh;
+
+} */
+
+.reveal {
+  position: relative;
+  transform: translateY(150px);
+  opacity: 0;
+  transition: 1s all ease;
+}
+
+.reveal.active {
+  transform: translateY(0);
+  opacity: 1;
+}
