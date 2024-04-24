@@ -199,28 +199,32 @@ export default function IndexPage({
                 <h2 className="mb-xl-5">Arbeidserfaring</h2>
                 {works.length > 0 && (
                   <ul className="container">
-                    {works.map((work) => (
-                      <li key={work._id}>
-                        <div className="d-flex flex-column flex-md-row justify-content-between mb-5">
-                          <div className="flex-grow-1">
-                            <h3 className="mb-0">{work?.title}</h3>
-                            <div className="subheading mb-3">
-                              {work?.company}
+                    {works
+                      .sort(
+                        (a, b) => new Date(b.fromdate) - new Date(a.fromdate)
+                      ) // Sort by year from high to low
+                      .map((work) => (
+                        <li key={work._id}>
+                          <div className="d-flex flex-column flex-md-row justify-content-between mb-5">
+                            <div className="flex-grow-1">
+                              <h3 className="mb-0">{work?.title}</h3>
+                              <div className="subheading mb-3">
+                                {work?.company}
+                              </div>
+                              <p>{work?.text}</p>
                             </div>
-                            <p>{work?.text}</p>
+                            <div className="flex-shrink-0">
+                              <span className="text-primary">
+                                {formatDate(work?.fromdate)}
+                              </span>{" "}
+                              -{" "}
+                              <span className="text-primary">
+                                {work?.todate ? formatDate(work.todate) : "DD"}
+                              </span>
+                            </div>
                           </div>
-                          <div className="flex-shrink-0">
-                            <span className="text-primary">
-                              {formatDate(work?.fromdate)}
-                            </span>{" "}
-                            -{" "}
-                            <span className="text-primary">
-                              {work?.todate ? formatDate(work.todate) : "DD"}
-                            </span>
-                          </div>
-                        </div>
-                      </li>
-                    ))}
+                        </li>
+                      ))}
                   </ul>
                 )}
               </div>
@@ -234,29 +238,33 @@ export default function IndexPage({
                 <h2 className="mb-5">Utdanning</h2>
                 {educations.length > 0 && (
                   <ul className="container">
-                    {educations.map((education) => (
-                      <li key={education._id}>
-                        <div className="d-flex flex-column flex-md-row justify-content-between mb-5">
-                          <div className="flex-grow-1">
-                            <h3 className="mb-0">{education?.school}</h3>
-                            <div className="subheading mb-3">
-                              {education?.line}
+                    {educations
+                      .sort(
+                        (a, b) => new Date(b.fromdate) - new Date(a.fromdate)
+                      ) // Sort by year from high to low
+                      .map((education) => (
+                        <li key={education._id}>
+                          <div className="d-flex flex-column flex-md-row justify-content-between mb-5">
+                            <div className="flex-grow-1">
+                              <h3 className="mb-0">{education?.school}</h3>
+                              <div className="subheading mb-3">
+                                {education?.line}
+                              </div>
+                            </div>
+                            <div className="flex-shrink-0">
+                              <span className="text-primary">
+                                {formatDate(education?.fromdate)}
+                              </span>{" "}
+                              -{" "}
+                              <span className="text-primary">
+                                {education?.todate
+                                  ? formatDate(education.todate)
+                                  : "DD"}
+                              </span>
                             </div>
                           </div>
-                          <div className="flex-shrink-0">
-                            <span className="text-primary">
-                              {formatDate(education?.fromdate)}
-                            </span>{" "}
-                            -{" "}
-                            <span className="text-primary">
-                              {education?.todate
-                                ? formatDate(education.todate)
-                                : "DD"}
-                            </span>
-                          </div>
-                        </div>
-                      </li>
-                    ))}
+                        </li>
+                      ))}
                   </ul>
                 )}
               </div>
