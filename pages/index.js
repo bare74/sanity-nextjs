@@ -32,6 +32,11 @@ export default function IndexPage({
     };
   }, []);
 
+  const formatYear = (dateString) => {
+    const year = new Date(dateString).getFullYear();
+    return !isNaN(year) ? year : "";
+  };
+
   const formatDate = (dateString) => {
     const options = { month: "short", year: "numeric" };
     const formattedDate = new Date(dateString).toLocaleDateString(
@@ -131,7 +136,6 @@ export default function IndexPage({
         {/* <!-- Page Content--> */}
         <div className="container-fluid p-0">
           {/* <!-- Om meg--> */}
-
           <section className="resume-section" id="about">
             <div className="resume-section-content">
               {contacts?.length > 0 &&
@@ -372,47 +376,21 @@ export default function IndexPage({
           <hr className="m-0" />
           {/* <!-- Awards--> */}
           <div className="container-test reveal">
-            <section className="resume-section" id="awards">
+            <section className="resume-section" id="education">
               <div className="resume-section-content">
-                <h2 className="mb-5">Kurs</h2>
-                <ul className="fa-ul mb-0">
-                  <li>
-                    <span className="fa-li"></span>
-                    2022 - Universell Utforming for nettredaktører
-                  </li>
-                  <li>
-                    <span className="fa-li"></span>
-                    2018 - SuperOffice CRM Administratorkurs
-                  </li>
-                  <li>
-                    <span className="fa-li"></span>
-                    2012 - Trener 1 Kurs Håndball
-                  </li>
-                  <li>
-                    <span className="fa-li"></span>
-                    2012- Regnskapskurs Visma
-                  </li>
-                  <li>
-                    <span className="fa-li"></span>
-                    2010 - CMAS * Dykke sertifikat
-                  </li>
-                  <li>
-                    <span className="fa-li"></span>
-                    2002 - Salgskurs, If Skadeforsikring
-                  </li>
-                  <li>
-                    <span className="fa-li"></span>
-                    1999 - Norges Varehandels Høyskole, Avansert Butikkopplæring
-                  </li>
-                  <li>
-                    <span className="fa-li"></span>
-                    1996 - VHF Sertifikat
-                  </li>
-                  <li>
-                    <span className="fa-li"></span>
-                    1996 - Securitas Vekterkurs
-                  </li>
-                </ul>
+                <h2 className="mb-5">KURS</h2>
+                {courses.length > 0 && (
+                  <ul className="fa-ul mb-0">
+                    {courses
+                      .sort((a, b) => new Date(b.year) - new Date(a.year)) // Sort by year from high to low
+                      .map((course) => (
+                        <li key={course._id}>
+                          <span className="fa-li"> </span>
+                          {formatYear(course?.year)} - {course?.course}{" "}
+                        </li>
+                      ))}
+                  </ul>
+                )}
               </div>
             </section>
           </div>
@@ -421,12 +399,12 @@ export default function IndexPage({
             <section className="resume-section" id="interests">
               <div className="resume-section-content">
                 <h2 className="mb-5">Fritidsinteresser</h2>
-                <p>
-                  Spilt Håndball i 25 år, håndball trener for Herrelaget fra
-                  2007-09 og 2013- 2016. Håndball trener for Jenter født 2001
-                  fra 2008-2018. J18 og 5 Div. fra 2017 – 2018. IT, Båtliv,
-                  dykking og lyd- og bilde.
-                </p>
+                {contacts?.length > 0 &&
+                  contacts.map((contact) => (
+                    <div key={contact._id}>
+                      <p>{contact?.leisure}</p>
+                    </div>
+                  ))}
               </div>
             </section>
           </div>
