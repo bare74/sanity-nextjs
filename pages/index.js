@@ -67,24 +67,37 @@ export default function IndexPage({
           </label>
         </div> */}
         {/* <!-- Navigation--> */}
+        {/* <div className="toggle-switch">
+          <label className="switch">
+            <input type="checkbox" onClick={myFunction} />
+            <div className="slider round">
+              <p>
+                DARK
+                <br />
+                MODE
+              </p>
+            </div>
+          </label>
+        </div> */}
         <nav
           className="navbar navbar-expand-lg navbar-dark bg-primaryA fixed-top"
           id="sideNav"
         >
-          <a className="navbar-brand js-scroll-trigger" href="#page-top">
+          <a className="navbar-brand js-scroll-trigger" href="/#page-top">
             <span className="d-block d-lg-none">Bjørn Are Nielsen</span>
             <span className="d-none d-lg-block">
               {contacts?.length > 0 &&
-                contacts.map((contact) => (
-                  <div key={contact._id}>
-                    {contact.image && (
-                      <img
-                        className="img-fluid img-profile rounded-circle mx-auto mb-2"
-                        src={urlFor(contact.image.asset).width(200).url()}
-                      />
-                    )}
-                  </div>
-                ))}
+                contacts.map(
+                  (contact) =>
+                    contact.image && (
+                      <div key={contact._id}>
+                        <img
+                          className="img-fluid img-profile rounded-circle mx-auto mb-2"
+                          src={urlFor(contact.image.asset).width(200).url()}
+                        />
+                      </div>
+                    )
+                )}
             </span>
           </a>
           <button
@@ -133,9 +146,8 @@ export default function IndexPage({
             </ul>
           </div>
         </nav>
-        {/* <!-- Page Content--> */}
+        {/* <!-- Om meg--> */}
         <div className="container-fluid p-0">
-          {/* <!-- Om meg--> */}
           <section className="resume-section" id="about">
             <div className="resume-section-content">
               {contacts?.length > 0 &&
@@ -193,16 +205,16 @@ export default function IndexPage({
           </section>
           <hr className="m-0" />
           {/* <!-- Arbeidserfaring--> */}
-          <div className="container-test reveal">
-            <section className="resume-section" id="experience">
-              <div className="resume-section-content">
-                <h2 className="mb-xl-5">Arbeidserfaring</h2>
+          <section className="resume-section" id="experience">
+            <div className="resume-section-content">
+              <h2 className="mb-xl-5">Arbeidserfaring</h2>
+              <div className="container-test reveal">
                 {works.length > 0 && (
                   <ul className="container">
                     {works
                       .sort(
                         (a, b) => new Date(b.fromdate) - new Date(a.fromdate)
-                      ) // Sort by year from high to low
+                      )
                       .map((work) => (
                         <li key={work._id}>
                           <div className="d-flex flex-column flex-md-row justify-content-between mb-5">
@@ -228,12 +240,13 @@ export default function IndexPage({
                   </ul>
                 )}
               </div>
-            </section>
-          </div>
+            </div>
+          </section>
+
           <hr className="m-0" />
           {/* <!-- Utdanning--> */}
-          <div className="container-test reveal">
-            <section className="resume-section" id="education">
+          <section className="resume-section" id="education">
+            <div className="container-test reveal">
               <div className="resume-section-content">
                 <h2 className="mb-5">Utdanning</h2>
                 {educations.length > 0 && (
@@ -241,7 +254,7 @@ export default function IndexPage({
                     {educations
                       .sort(
                         (a, b) => new Date(b.fromdate) - new Date(a.fromdate)
-                      ) // Sort by year from high to low
+                      )
                       .map((education) => (
                         <li key={education._id}>
                           <div className="d-flex flex-column flex-md-row justify-content-between mb-5">
@@ -268,12 +281,13 @@ export default function IndexPage({
                   </ul>
                 )}
               </div>
-            </section>
-          </div>
+            </div>
+          </section>
+
           <hr className="m-0" />
           {/* <!-- Datakunnskaper--> */}
           <div className="container-test reveal">
-            <section className="resume-section">
+            <section className="resume-section" id="skills">
               <div className="resume-section-content">
                 <h2 className="mb-5">Datakunnskaper</h2>
                 <div className="subheading mb-3">
@@ -382,15 +396,15 @@ export default function IndexPage({
             </section>
           </div>
           <hr className="m-0" />
-          {/* <!-- Awards--> */}
+          {/* <!-- Kurs--> */}
           <div className="container-test reveal">
-            <section className="resume-section" id="education">
+            <section className="resume-section" id="awards">
               <div className="resume-section-content">
                 <h2 className="mb-5">KURS</h2>
                 {courses.length > 0 && (
                   <ul className="fa-ul mb-0">
                     {courses
-                      .sort((a, b) => new Date(b.year) - new Date(a.year)) // Sort by year from high to low
+                      .sort((a, b) => new Date(b.year) - new Date(a.year))
                       .map((course) => (
                         <li key={course._id}>
                           <span className="fa-li"> </span>
@@ -462,9 +476,3 @@ const builder = imageUrlBuilder(client);
 function urlFor(source) {
   return builder.image(source);
 }
-// function myFunction() {
-//   var element = document.body;
-//   element.classList.toggle("dark-mode");
-//   htmlEl.classList.toggle("bg-primaryA");
-//   htmlEl.classList.toggle("bg-primaryB");
-// }
