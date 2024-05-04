@@ -1,5 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
-import Test from "./test";
+// import Test from "./test";
 
 class MyDocument extends Document {
   render() {
@@ -32,7 +32,7 @@ class MyDocument extends Document {
         </Head>
         <body>
           <Main />
-          <Test />
+          {/* <Test /> */}
           <NextScript />
         </body>
       </Html>
