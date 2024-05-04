@@ -211,7 +211,7 @@ ul.card-list li:hover {
   --bs-body-bg: #fff;
 }
 
-*,
+
 *::before,
 *::after {
   box-sizing: border-box;
@@ -12853,3 +12853,14 @@ input:checked+.slider:before {
     left: 85%;
   }
 } */
+
+.heroSection {
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+}

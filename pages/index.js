@@ -27,6 +27,14 @@ export default function IndexPage({
 }) {
   useEffect(() => {
     window.addEventListener("scroll", reveal);
+
+    // const text = document.querySelector("h1");
+    // window.addEventListener("scroll", () => {
+    //   const current = window.scrollY;
+
+    //   text.style.fontSize = `clamp(2rem, ${current}px, 20rem)`;
+    // });
+
     return () => {
       window.removeEventListener("scroll", reveal);
     };
@@ -48,6 +56,11 @@ export default function IndexPage({
   return (
     <>
       <main>
+        {/* <div className="heroSection">
+          <div className="container">
+            <h1>Bjørn Are Nielsen</h1>
+          </div>
+        </div> */}
         {/* {!works.length > 0 && <p>No pets to show</p>}
         {works.length > 0 && (
           <div>
@@ -245,10 +258,11 @@ export default function IndexPage({
 
           <hr className="m-0" />
           {/* <!-- Utdanning--> */}
+
           <section className="resume-section" id="education">
-            <div className="container-test reveal">
-              <div className="resume-section-content">
-                <h2 className="mb-5">Utdanning</h2>
+            <div className="resume-section-content">
+              <h2 className="mb-xl-5">Utdanning</h2>
+              <div className="container-test reveal">
                 {educations.length > 0 && (
                   <ul className="container">
                     {educations
@@ -286,10 +300,10 @@ export default function IndexPage({
 
           <hr className="m-0" />
           {/* <!-- Datakunnskaper--> */}
-          <div className="container-test reveal">
-            <section className="resume-section" id="skills">
-              <div className="resume-section-content">
-                <h2 className="mb-5">Datakunnskaper</h2>
+          <section className="resume-section" id="skills">
+            <div className="resume-section-content">
+              <h2 className="mb-5">Datakunnskaper</h2>
+              <div className="container-test reveal">
                 <div className="subheading mb-3">
                   Programmer språk og verktøy
                 </div>
@@ -393,14 +407,16 @@ export default function IndexPage({
                   </li>
                 </ul>
               </div>
-            </section>
-          </div>
+            </div>
+          </section>
+
           <hr className="m-0" />
           {/* <!-- Kurs--> */}
-          <div className="container-test reveal">
-            <section className="resume-section" id="awards">
-              <div className="resume-section-content">
-                <h2 className="mb-5">KURS</h2>
+
+          <section className="resume-section" id="awards">
+            <div className="resume-section-content">
+              <h2 className="mb-5">KURS</h2>
+              <div className="container-test reveal">
                 {courses.length > 0 && (
                   <ul className="fa-ul mb-0">
                     {courses
@@ -414,22 +430,23 @@ export default function IndexPage({
                   </ul>
                 )}
               </div>
-            </section>
-          </div>
+            </div>
+          </section>
+
           {/* <!-- Fritidsinteresser--> */}
-          <div className="container-test reveal">
-            <section className="resume-section" id="interests">
-              <div className="resume-section-content">
-                <h2 className="mb-5">Fritidsinteresser</h2>
-                {contacts?.length > 0 &&
-                  contacts.map((contact) => (
-                    <div key={contact._id}>
-                      <p>{contact?.leisure}</p>
-                    </div>
-                  ))}
-              </div>
-            </section>
-          </div>
+          {/* <div className="container-test reveal"> */}
+          <section className="resume-section" id="interests">
+            <div className="resume-section-content">
+              <h2 className="mb-5">Fritidsinteresser</h2>
+              {contacts?.length > 0 &&
+                contacts.map((contact) => (
+                  <div key={contact._id}>
+                    <p>{contact?.leisure}</p>
+                  </div>
+                ))}
+            </div>
+          </section>
+
           <hr className="m-0" />
         </div>
         <script
